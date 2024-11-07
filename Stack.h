@@ -29,6 +29,9 @@ public:
     // Метод для вывода элементов стека
     void Sdisplay() const;
 
+    void SreadFromFile(const std::string& filename);
+    void SwriteToFile(const std::string& filename) const;
+
 private:
     int* arr;      // Динамический массив для хранения элементов стека
     int top;       // Индекс верхнего элемента стека

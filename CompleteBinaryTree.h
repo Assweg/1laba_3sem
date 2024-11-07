@@ -1,6 +1,8 @@
 #ifndef COMPLETE_BINARY_TREE_H
 #define COMPLETE_BINARY_TREE_H
 
+#include <fstream>
+#include <sstream>
 #include <iostream>
 #include <iomanip> // Для форматирования вывода
 #include <cmath>   // Для функции pow
@@ -24,6 +26,8 @@ public:
 
     // Метод для печати дерева в виде структурированного вывода
     void Tprint() const;
+    void TreadFromFile(const std::string &filename);
+    void TwriteToFile(const std::string &filename) const;
 
 private:
     int *tree;         // Массив для хранения элементов дерева

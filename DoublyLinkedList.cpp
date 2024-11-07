@@ -1,5 +1,6 @@
 #include <iostream>
 #include "DoublyLinkedList.h"
+#include <fstream>
 
 using namespace std;
 
@@ -106,4 +107,35 @@ void DoublyLinkedList::Lprint2() const {
         curr = curr->next; // Переходим к следующему элементу.
     }
         cout << endl;
+}
+
+// Считывает элементы двусвязного списка из файла.
+void DoublyLinkedList::LreadFromFile2(const std::string& filename) {
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        throw std::runtime_error("Не удалось открыть файл для чтения.");
+    }
+    
+    int value;
+    while (file >> value) {
+        LpushBack2(value); // Добавляем элементы в конец списка.
+    }
+    
+    file.close();
+}
+
+// Записывает элементы двусвязного списка в файл.
+void DoublyLinkedList::LwriteToFile2(const std::string& filename) const {
+    std::ofstream file(filename);
+    if (!file.is_open()) {
+        throw std::runtime_error("Не удалось открыть файл для записи.");
+    }
+    
+    Node2* curr = head;
+    while (curr) {
+        file << curr->data << " "; // Записываем значение элемента.
+        curr = curr->next; // Переходим к следующему элементу.
+    }
+    
+    file.close();
 }

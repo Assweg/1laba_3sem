@@ -22,12 +22,16 @@ void printMainSelection() {
 
 void ArrayMenu() {
     cout << "Выберите операцию:\n";
-    cout << "1. Добавить элемент\n";
+    cout << "1. Добавить элемент в конец\n";
     cout << "2. Вставить элемент по индексу\n";
     cout << "3. Удалить элемент по индексу\n";
     cout << "4. Заменить элемент по индексу\n";
     cout << "5. Вывести массив на экран\n";
-    cout << "6. Назад\n";
+    cout << "6. Получить элемент по индексу\n";
+    cout << "7. Записать массив в файл\n";
+    cout << "8. Выгрузить массив из файла\n";
+    cout << "9. Узнать длину массива\n";
+    cout << "10. Назад\n";
     cout << "Ваш выбор: ";
 }
 
@@ -40,7 +44,9 @@ void LinkedListMenu() {
     cout << "5. Удалить элемент по значению\n";
     cout << "6. Найти элемент по значению\n";
     cout << "7. Вывести список на экран\n";
-    cout << "8. Назад\n";
+    cout << "8. Записать односвязный список в файл\n";
+    cout << "9. Выгрузить односвязный список из файла\n";
+    cout << "10. Назад\n";
     cout << "Ваш выбор: ";
 }
 
@@ -53,7 +59,9 @@ void DoublyLinkedListMenu() {
     cout << "5. Удалить элемент по значению\n";
     cout << "6. Найти элемент по значению\n";
     cout << "7. Вывести список на экран\n";
-    cout << "8. Назад\n";
+    cout << "8. Записать двусвязный список в файл\n";
+    cout << "9. Выгрузить двусвязный список из файла\n";
+    cout << "10. Назад\n";
     cout << "Ваш выбор: ";
 }
 
@@ -61,9 +69,11 @@ void QueueMenu() {
     cout << "Выберите операцию:\n";
     cout << "1. Добавить элемент\n";
     cout << "2. Удалить элемент\n";
-    cout << "3. Прочитать элемент\n";
+    cout << "3. Вывести первый элемент очереди\n";
     cout << "4. Вывести очередь на экран\n";
-    cout << "5. Назад\n";
+    cout << "5. Считать очередь из файла\n";
+    cout << "6. Записать очередь в файл\n";
+    cout << "7. Назад\n";
     cout << "Ваш выбор: ";
 }
 
@@ -73,7 +83,9 @@ void StackMenu() {
     cout << "2. Удалить элемент\n";
     cout << "3. Прочитать элемент\n";
     cout << "4. Показать элементы стека\n";
-    cout << "5. Назад\n";
+    cout << "5. Считать стек из файла\n";
+    cout << "6. Записать стек в файл\n";
+    cout << "7. Назад\n";
     cout << "Ваш выбор: ";
 }
 
@@ -83,7 +95,9 @@ void HashTableMenu() {
     cout << "2. Получить элемент\n";
     cout << "3. Удалить элемент\n";
     cout << "4. Показать все элементы\n";
-    cout << "5. Назад\n";
+    cout << "5. Считать хеш таблицу из файла" << endl;
+    cout << "6. Записать хеш таблицу в файл" << endl;
+    cout << "7. Назад\n";
     cout << "Ваш выбор: ";
 }
 
@@ -93,7 +107,9 @@ void CompleteBinaryTreeMenu() {
     cout << "2. Поиск элемента\n";
     cout << "3. Проверить, является ли дерево полным\n";
     cout << "4. Показать дерево\n";
-    cout << "5. Назад\n";
+    cout << "5. Считать из файла\n";
+    cout << "6. Записать в файл\n";
+    cout << "7. Назад\n";
     cout << "Ваш выбор: ";
 }
 
@@ -113,12 +129,13 @@ int main() {
             Array array;
             int choice;
             int element, index;
+            string filename;
 
             while (true) {
                 ArrayMenu();
                 cin >> choice;
 
-                if(choice == 6) {
+                if(choice == 10) {
                     break;
                 }
 
@@ -164,8 +181,39 @@ int main() {
                         array.mget();
                         break;
 
+                    case 6: // Получить элемент по индексу
+                        //int index;
+                        cout << "Введите индекс элемента для получения: ";
+                        cin >> index;
+                        // Проверьте, что индекс находится в пределах допустимых значений
+                        if (index < 0 || index >= array.mlength()) {
+                            cout << "Ошибка: индекс выходит за пределы массива." << endl;
+                        } else {
+                            cout << "Элемент по индексу " << index << ": " << array.mprint(index) << endl; // Получение элемента
+                        }
+                        break;
+                    
+                    case 7: // Сохранить массив в файл
+                        //string filename;
+                        cout << "Введите имя файла для сохранения: ";
+                        cin >> filename;
+                        array.saveToFile(filename);
+                        break;
+
+                    case 8: // Загрузить массив из файла
+                        //string filename;
+                        cout << "Введите имя файла для загрузки: ";
+                        cin >> filename;
+                        array.loadFromFile(filename);
+                        break;
+
+                    case 9:
+                        cout << "Длина массива: " << array.mlength() << endl;
+                        break;
+
                     default:
                         cout << "Некорректный выбор, попробуйте снова.\n";
+                        break;
                 }
             }
         }
@@ -173,12 +221,13 @@ int main() {
             LinkedList list; // Создаем экземпляр списка
             int choice;
             int value;
+            string filename;
 
             while (true) {
                 LinkedListMenu(); // Показываем меню
                 cin >> choice; // Читаем выбор пользователя
 
-                if(choice == 8) {
+                if(choice == 10) {
                     break;
                 }
 
@@ -226,7 +275,18 @@ int main() {
                         cout << "Элементы списка: ";
                         list.Lprint(); // Печать списка
                         break;
+                    case 8:
+                        cout << "Введите имя файла для записи: ";
+                        cin >> filename;
+                        list.writeToFile(filename);
+                        break;
 
+                    case 9:
+                        cout << "Введите имя файла для чтения: ";
+                        cin >> filename;
+                        list.readFromFile(filename);
+                        break;
+                    
                     default:
                         cout << "Неверный выбор. Пожалуйста, попробуйте снова.\n";
                         break;
@@ -237,12 +297,13 @@ int main() {
             DoublyLinkedList list; // Создаем экземпляр списка
             int choice;
             int value;
+            string filename;
 
             while (true) {
                 DoublyLinkedListMenu(); // Показываем меню
                 cin >> choice; // Читаем выбор пользователя
 
-                if(choice == 8) {
+                if(choice == 10) {
                     break;
                 }
 
@@ -291,6 +352,28 @@ int main() {
                         list.Lprint2(); // Печать списка
                         break;
 
+                    case 8:
+                        cout << "Введите имя файла для записи: ";
+                        cin >> filename;
+                        try {
+                            list.LwriteToFile2(filename);
+                            cout << "Список успешно записан в файл.\n";
+                        } catch (const runtime_error& e) {
+                            cout << e.what() << endl;
+                        }
+                        break;
+
+                    case 9:
+                        cout << "Введите имя файла для считывания: ";
+                        cin >> filename;
+                        try {
+                            list.LreadFromFile2(filename);
+                            cout << "Список успешно считан из файла.\n";
+                        } catch (const runtime_error& e) {
+                            cout << e.what() << endl;
+                        }
+                        break;
+
                     default:
                         cout << "Неверный выбор. Пожалуйста, попробуйте снова.\n";
                         break;
@@ -304,12 +387,13 @@ int main() {
 
             Queue queue(size); // Создаём очередь определённого размера
             int choice;
+            string filename;
 
             while (true) {
                 QueueMenu(); // Показываем меню
                 cin >> choice; // Читаем выбор пользователя
 
-                if(choice == 5) {
+                if(choice == 7) {
                     break;
                 }
 
@@ -337,6 +421,28 @@ int main() {
                         queue.Qprint();
                         break;
 
+                    case 5:
+                        cout << "Введите имя файла для считывания: ";
+                        cin >> filename;
+                        try {
+                            queue.QreadFromFile(filename);
+                            cout << "Очередь успешно считана из файла.\n";
+                        } catch (runtime_error& e) {
+                            cout << e.what() << endl;
+                        }
+                        break;
+
+                    case 6:
+                        cout << "Введите имя файла для записи: ";
+                        cin >> filename;
+                        try {
+                            queue.QwriteToFile(filename);
+                            cout << "Очередь успешно записана в файл.\n";
+                        } catch (runtime_error& e) {
+                            cout << e.what() << endl;
+                        }
+                        break;
+
                     default: // Неверный выбор
                         cout << "Неверный выбор. Пожалуйста, попробуйте снова." << endl;
                 }
@@ -349,12 +455,13 @@ int main() {
 
             Stack stack(size); // Создаём стек определённого размера
             int choice;
+            string filename;
 
             while (true) {
                 StackMenu();
                 cin >> choice;
 
-                if(choice == 5) {
+                if(choice == 7) {
                     break;
                 }
 
@@ -382,21 +489,43 @@ int main() {
                         stack.Sdisplay();
                         break;
 
+                    case 5:
+                        cout << "Введите имя файла для считывания: ";
+                        cin >> filename;
+                        try {
+                            stack.SreadFromFile(filename);
+                            cout << "Стек успешно считан из файла.\n";
+                        } catch (runtime_error& e) {
+                            cout << e.what() << endl;
+                        }
+                        break;
+
+                    case 6:
+                        cout << "Введите имя файла для записи: ";
+                        cin >> filename;
+                        try {
+                            stack.SwriteToFile(filename);
+                            cout << "Стек успешно записан в файл.\n";
+                        } catch (runtime_error& e) {
+                            cout << e.what() << endl;
+                        }
+                        break;
+
                     default: // Неверный выбор
                         cout << "Неверный выбор. Пожалуйста, попробуйте снова." << endl;
                 }
             }
         }
         if (mainChoice == 6) {
-            HashTable table; // Создаем экземпляр списка
+            HashTable table;
             int choice;
-            string key, value;
+            string key, value, filename;
 
             while (true) {
-                HashTableMenu(); // Показываем меню
-                cin >> choice; // Читаем выбор пользователя
+                HashTableMenu();
+                cin >> choice;
 
-                if(choice == 5) {
+                if(choice == 7) {
                     break;
                 }
 
@@ -434,6 +563,27 @@ int main() {
                         table.Hprint();
                         break;
 
+                    case 5:
+                        cout << "Введите имя файла для считывания: ";
+                        cin >> filename;
+                        try {
+                            table.HreadFromFile(filename);
+                            cout << "Данные считаны из файла." << endl;
+                        } catch (const runtime_error &e) {
+                            cout << e.what() << endl;
+                        }
+                        break;
+                    case 6:
+                        cout << "Введите имя файла для записи: ";
+                        cin >> filename;
+                        try {
+                            table.HwriteToFile(filename);
+                            cout << "Данные записаны в файл." << endl;
+                        } catch (const runtime_error &e) {
+                            cout << e.what() << endl;
+                        }
+                        break;
+
                     default:
                         cout << "Неверный выбор. Попробуйте снова.\n";
                         break;
@@ -448,12 +598,13 @@ int main() {
             CompleteBinaryTree tree(capacity);
 
             int choice, value;
+            string filename;
 
             while (true) {
                 CompleteBinaryTreeMenu(); // Показываем меню
                 cin >> choice; // Читаем выбор пользователя
 
-                if(choice == 5) {
+                if(choice == 7) {
                     break;
                 }
 
@@ -487,6 +638,18 @@ int main() {
                         cout << "Дерево:\n";
                         tree.Tprint();
                         break;
+
+                    case 5:
+                        cout << "Введите имя файла для чтения: ";
+                        cin >> filename;
+                        tree.TreadFromFile(filename);
+                        break;
+                    
+                    case 6:
+                        cout << "Введите имя файла для записи: ";
+                        cin >> filename;
+                        tree.TwriteToFile(filename);
+                        break;    
 
                     default:
                         cout << "Неверный выбор. Попробуйте снова.\n";

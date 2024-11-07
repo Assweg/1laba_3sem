@@ -5,6 +5,8 @@ using namespace std;
 
 #include <iostream>
 #include <string> 
+#include <fstream>
+#include <stdexcept>
 
 // Константа для определения размера таблицы
 const int TABLE_SIZE = 10;
@@ -28,17 +30,12 @@ public:
     // Деструктор хеш-таблицы для очистки ресурсов
     ~HashTable();
     
-    // Метод для добавления или обновления элемента в хеш-таблице
-    void Hinsert(const string &key, const string &value);
-    
-    // Метод для получения значения по ключу
-    bool Hget(const string &key, string &value);
-    
-    // Метод для удаления элемента по ключу
-    bool Hdel(const string &key);
-    
-    // Метод для отображения всех элементов в хеш-таблице
-    void Hprint() const;
+    void Hinsert(const string &key, const string &value);   // Метод для добавления или обновления элемента в хеш-таблице
+    bool Hget(const string &key, string &value);    // Метод для получения значения по ключу
+    bool Hdel(const string &key);   // Метод для удаления элемента по ключу
+    void Hprint() const;    // Метод для отображения всех элементов в хеш-таблице
+    void HreadFromFile(const std::string &filename);
+    void HwriteToFile(const std::string &filename) const;
 
 private:
     // Хеш-функция для получения индекса по ключу

@@ -1,6 +1,6 @@
-
 #include "Queue.h"
 #include <stdexcept>
+#include <fstream>
 
 using namespace std;
 
@@ -62,4 +62,44 @@ void Queue::Qprint() const {
         cout << arr[i] << " ";
     }
     cout << endl;
+}
+
+void Queue::QreadFromFile(const std::string& filename) {
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        throw std::runtime_error("Не удалось открыть файл для чтения.");
+    }
+
+    // Сбрасываем очередь
+    front = 0;
+    rear = 0;
+
+    int value;
+    while (file >> value) {
+        if (QisFull()) {
+            throw std::runtime_error("Очередь переполнена при считывании из файла.");
+        }
+        Qpush(value); // Добавляем элементы в очередь
+    }
+
+    file.close();
+}
+
+void Queue::QwriteToFile(const std::string& filename) const {
+    std::ofstream file(filename);
+    if (!file.is_open()) {
+        throw std::runtime_error("Не удалось открыть файл для записи.");
+    }
+
+    if (QisEmpty()) {
+        cout << "Очередь пуста, ничего не записано." << endl;
+        file.close();
+        return;
+    }
+
+    for (int i = front; i != rear; i = (i + 1) % maxSize) {
+        file << arr[i] << " "; // Записываем элементы в файл
+    }
+
+    file.close();
 }

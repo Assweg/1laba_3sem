@@ -1,5 +1,6 @@
 #include <iostream>
 #include "LinkedList.h"
+#include <fstream>
 
 using namespace std;
 
@@ -114,4 +115,37 @@ void LinkedList::Lprint() const {
         curr = curr->next; // Перемещаемся к следующему элементу
     }
     cout << endl; // Печатаем перевод строки
+}
+
+// Метод для чтения односвязного списка из файла
+void LinkedList::readFromFile(const string& filename) {
+    ifstream file(filename);
+    if (!file) {
+        cerr << "Ошибка открытия файла!" << endl;
+        return;
+    }
+
+    int value;
+    while (file >> value) { // Читаем значения до конца файла
+        LpushBack(value); // Добавляем значения в конец списка
+    }
+
+    file.close(); // Закрываем файл
+}
+
+// Метод для записи односвязного списка в файл
+void LinkedList::writeToFile(const string& filename) const {
+    ofstream file(filename);
+    if (!file) {
+        cerr << "Ошибка открытия файла!" << endl;
+        return;
+    }
+
+    Node* curr = head; // Начинаем с головы
+    while (curr) {
+        file << curr->data << " "; // Печатаем текущий элемент
+        curr = curr->next; // Перемещаемся к следующему элементу
+    }
+
+    file.close(); // Закрываем файл
 }

@@ -1,5 +1,9 @@
+
 #ifndef ARRAY_H
 #define ARRAY_H
+
+#include <string>
+#include <fstream>
 
 class Array {
 private:
@@ -18,8 +22,11 @@ public:
     void mdel(int index);                   // Удаление элемента по индексу
     int mprint(int index) const;            // Получение элемента по индексу
     void mreplace(int index, int element);  // Замена элемента по индексу
-    int mlength() const;                    // Узнать длину массива
+    int mlength();                          // Узнать длину массива
     void mget() const;                      // Чтение массива
+
+    void loadFromFile(const std::string& filename); // Считывание массива из файла
+    void saveToFile(const std::string& filename) const; // Запись массива в файл
 };
 
 #endif
