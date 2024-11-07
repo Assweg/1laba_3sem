@@ -27,6 +27,8 @@ public:
     void Ldel2(int value);                 // Удаление элемента по значению
     bool Lfind2(int value) const;          // Поиск элемента по значению
     void Lprint2() const;                  // Чтение списка   
+    void LreadFromFile2(const std::string& filename);
+    void LwriteToFile2(const std::string& filename) const;
 };
 
 #endif 

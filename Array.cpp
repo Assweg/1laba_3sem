@@ -1,7 +1,7 @@
 #include <iostream>
 #include <stdexcept>
 #include "Array.h"
-
+ 
 using namespace std;
 
 // Конструктор класса Array
@@ -77,7 +77,7 @@ void Array::mreplace(int index, int element) {
 }
 
 // Метод получения текущего размера массива
-int Array::mlength() const {
+int Array::mlength() {
     return size; // Возвращаем текущее количество элементов
 }
 
@@ -87,4 +87,32 @@ void Array::mget() const {
         cout << data[i] << " "; // Выводим каждый элемент массива
     }
     cout << endl;
+}
+
+
+// Метод для считывания массива из файла
+void Array::loadFromFile(const string& filename) {
+    ifstream inFile(filename);
+    if (!inFile) {
+        throw runtime_error("Unable to open file for reading");
+    }
+    
+    int value;
+    while (inFile >> value) {
+        mpush(value); // Добавляем элементы в массив
+    }
+    inFile.close(); // Закрываем файл
+}
+
+// Метод для записи массива в файл
+void Array::saveToFile(const string& filename) const {
+    ofstream outFile(filename);
+    if (!outFile) {
+        throw runtime_error("Unable to open file for writing");
+    }
+    
+    for (int i = 0; i < size; ++i) {
+        outFile << data[i] << " "; // Записываем каждый элемент массива в файл
+    }
+    outFile.close(); // Закрываем файл
 }

@@ -11,23 +11,14 @@ public:
     // Деструктор
     ~Queue();
 
-    // Метод для добавления элемента в конец очереди
-    void Qpush(int value);
-
-    // Метод для удаления элемента из начала очереди
-    void Qpop();
-    
-    // Метод для получения значения переднего элемента без его удаления
-    int Qpeek() const;
-
-    // Метод для проверки, пуста ли очередь
-    bool QisEmpty() const;
-
-    // Метод для проверки, заполнена ли очередь
-    bool QisFull() const;
-    
-    // Метод для вывода элементов очереди
-    void Qprint() const;
+    void Qpush(int value);  // Метод для добавления элемента в конец очереди
+    void Qpop();    // Метод для удаления элемента из начала очереди    
+    int Qpeek() const;  // Метод для получения значения переднего элемента без его удаления
+    bool QisEmpty() const;  // Метод для проверки, пуста ли очередь
+    bool QisFull() const;   // Метод для проверки, заполнена ли очередь
+    void Qprint() const;    // Метод для вывода элементов очереди
+    void QreadFromFile(const std::string& filename);
+    void QwriteToFile(const std::string& filename) const;
 
 private:
     int* arr;      // Динамический массив для хранения элементов очереди

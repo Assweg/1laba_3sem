@@ -1,5 +1,6 @@
 #include "Stack.h"
 #include <stdexcept>
+#include <fstream>
 
 using namespace std;
 
@@ -61,4 +62,43 @@ void Stack::Sdisplay() const {
         cout << arr[i] << " ";
     }
     cout << endl;
+}
+
+void Stack::SreadFromFile(const std::string& filename) {
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        throw std::runtime_error("Не удалось открыть файл для чтения.");
+    }
+
+    // Сбрасываем стек
+    top = -1;
+
+    int value;
+    while (file >> value) {
+        if (SisFull()) {
+            throw std::runtime_error("Стек переполнен при считывании из файла.");
+        }
+        Spush(value); // Добавляем элементы в стек
+    }
+
+    file.close();
+}
+
+void Stack::SwriteToFile(const std::string& filename) const {
+    std::ofstream file(filename);
+    if (!file.is_open()) {
+        throw std::runtime_error("Не удалось открыть файл для записи.");
+    }
+
+    if (SisEmpty()) {
+        cout << "Стек пуст, ничего не записано." << endl;
+        file.close();
+        return;
+    }
+
+    for (int i = top; i >= 0; --i) {
+        file << arr[i] << " \n"; // Записываем элементы в файл
+    }
+
+    file.close();
 }

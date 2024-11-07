@@ -112,3 +112,36 @@ void HashTable::Hprint() const {
         cout << endl; // Переходим на новую строку
     }
 }
+
+// Функция для считывания хеш-таблицы из файла
+void HashTable::HreadFromFile(const std::string &filename) {
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        throw std::runtime_error("Не удалось открыть файл для чтения.");
+    }
+
+    std::string key, value;
+    while (file >> key >> value) {
+        Hinsert(key, value); // Вставляем каждую пару (ключ, значение) в хеш-таблицу
+    }
+
+    file.close(); // Закрываем файл
+}
+
+// Функция для записи хеш-таблицы в файл
+void HashTable::HwriteToFile(const std::string &filename) const {
+    std::ofstream file(filename);
+    if (!file.is_open()) {
+        throw std::runtime_error("Не удалось открыть файл для записи.");
+    }
+
+    for (int i = 0; i < TABLE_SIZE; ++i) {
+        NodeH* current = table[i];
+        while (current) {
+            file << current->key << " " << current->value << std::endl; // Записываем пары ключ-значение
+            current = current->next; // Переходим к следующему узлу
+        }
+    }
+
+    file.close(); // Закрываем файл
+}

@@ -67,3 +67,36 @@ void CompleteBinaryTree::printTree(int index, int indent) const {
         }
     }
 }
+
+// Функция для считывания дерева из файла
+void CompleteBinaryTree::TreadFromFile(const std::string &filename) {
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        cout << "Не удалось открыть файл для чтения!" << endl;
+        return;
+    }
+
+    int value;
+    while (file >> value) {
+        if (value != -1) { // Предположим, что -1 обозначает пустое значение
+            Tinsert(value); // Вставляем элемент в дерево
+        }
+    }
+
+    file.close(); // Закрываем файл
+}
+
+// Функция для записи дерева в файл
+void CompleteBinaryTree::TwriteToFile(const std::string &filename) const {
+    std::ofstream file(filename);
+    if (!file.is_open()) {
+        cout << "Не удалось открыть файл для записи!" << endl;
+        return;
+    }
+
+    for (int i = 0; i < size; i++) {
+        file << tree[i] << "\n"; // Записываем каждый элемент в файл
+    }
+
+    file.close(); // Закрываем файл
+}
